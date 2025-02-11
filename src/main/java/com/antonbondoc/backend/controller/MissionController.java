@@ -40,6 +40,7 @@ public class MissionController {
     @DeleteMapping("/{statement-id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public ResponseEntity<Void> deleteStatement() {
+        missionService.deleteStatement();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
