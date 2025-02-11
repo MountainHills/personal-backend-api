@@ -29,8 +29,10 @@ public class Statement {
     @Column(nullable = false)
     private UUID id;
 
+    @Column(nullable = false)
     private String statement;
 
+    @Column(nullable = false)
     private int rank;
 
     @CreationTimestamp
