@@ -2,6 +2,7 @@ package com.antonbondoc.backend.controller;
 
 import com.antonbondoc.backend.dto.CreateStatementDto;
 import com.antonbondoc.backend.dto.StatementDto;
+import com.antonbondoc.backend.dto.UpdateStatementDto;
 import com.antonbondoc.backend.service.MissionService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -39,8 +40,8 @@ public class MissionController {
     }
 
     @PutMapping("/{statement-id}")
-    public ResponseEntity<StatementDto> updateStatement() {
-        return ResponseEntity.ok(missionService.updateStatement());
+    public ResponseEntity<StatementDto> updateStatement(@PathVariable("statement-id") UUID statementId, @Valid @RequestBody UpdateStatementDto request) {
+        return ResponseEntity.ok(missionService.updateStatement(statementId, request));
     }
 
     @DeleteMapping("/{statement-id}")

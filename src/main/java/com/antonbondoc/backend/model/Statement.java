@@ -32,7 +32,7 @@ public class Statement {
     @Column(nullable = false)
     private String statement;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private int rank;
 
     @CreationTimestamp
