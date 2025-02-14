@@ -1,6 +1,8 @@
 package com.antonbondoc.backend.service;
 
+import com.antonbondoc.backend.dto.CreateStatementDto;
 import com.antonbondoc.backend.dto.StatementDto;
+import com.antonbondoc.backend.model.Statement;
 import com.antonbondoc.backend.repository.StatementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -25,8 +27,21 @@ public class MissionService {
                 .toList();
     }
 
-    public StatementDto createStatement() {
-        return StatementDto.builder().build();
+    public StatementDto createStatement(CreateStatementDto request) {
+        int lastRank = statementRepository.findLastRank();
+
+        Statement statement = Statement.builder()
+                .statement(request.getStatement())
+                .rank(lastRank + 1)
+                .build();
+
+        statement = statementRepository.save(statement);
+
+        return StatementDto.builder()
+                .id(statement.getId())
+                .rank(statement.getRank())
+                .statement(statement.getStatement())
+                .build();
     }
 
     public StatementDto updateStatement() {
