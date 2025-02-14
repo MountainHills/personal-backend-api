@@ -28,8 +28,9 @@ public class MissionController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<StatementDto> createStatement() {
-        return ResponseEntity.ok(missionService.createStatement());
+        return new ResponseEntity<>(missionService.createStatement(), HttpStatus.CREATED);
     }
 
     @PutMapping("/{statement-id}")
