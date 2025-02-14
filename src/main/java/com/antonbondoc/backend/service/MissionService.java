@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -48,7 +49,10 @@ public class MissionService {
         return StatementDto.builder().build();
     }
 
-    public void deleteStatement() {
-        // No-op
+    public void deleteStatement(UUID statementId) {
+        Statement statement = statementRepository.findById(statementId)
+                .orElseThrow(() -> new IllegalArgumentException("Statement does not exist"));
+
+        statementRepository.delete(statement);
     }
 }
